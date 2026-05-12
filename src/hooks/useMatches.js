@@ -1,9 +1,6 @@
 import { useState, useEffect } from 'react';
 
 const API_KEY = import.meta.env.VITE_API_KEY;
-const BASE = import.meta.env.DEV
-  ? '/api/football/v4'
-  : 'https://api.football-data.org/v4';
 
 export function useMatches() {
   const [matches, setMatches] = useState([]);
@@ -13,9 +10,14 @@ export function useMatches() {
   useEffect(() => {
     async function fetchMatches() {
       try {
-        const res = await fetch(`${BASE}/competitions/WC/matches`, {
-          headers: { 'X-Auth-Token': API_KEY },
-        });
+        // In dev use Vite proxy, in prod use Vercel serverless function
+        const url = import.meta.env.DEV
+          ? '/api/football/v4/competitions/WC/matches'
+          : '/api/matches';
+        const headers = import.meta.env.DEV
+          ? { 'X-Auth-Token': API_KEY }
+          : {};
+        const res = await fetch(url, { headers });
         if (!res.ok) throw new Error(`API error: ${res.status}`);
         const data = await res.json();
         setMatches(data.matches || []);
