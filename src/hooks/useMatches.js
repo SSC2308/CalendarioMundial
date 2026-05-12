@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 
 const API_KEY = import.meta.env.VITE_API_KEY;
-const BASE = '/api/football/v4';
+const BASE = import.meta.env.DEV
+  ? '/api/football/v4'
+  : 'https://api.football-data.org/v4';
 
 export function useMatches() {
   const [matches, setMatches] = useState([]);
