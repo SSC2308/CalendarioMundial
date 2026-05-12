@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
+  <rect width="192" height="192" rx="42" fill="#0a0a0a"/>
+  <circle cx="96" cy="88" r="52" fill="none" stroke="#D4AF37" stroke-width="7"/>
+  <circle cx="96" cy="88" r="18" fill="#D4AF37"/>
+  <line x1="96" y1="36" x2="96" y2="70" stroke="#D4AF37" stroke-width="7"/>
+  <line x1="96" y1="106" x2="96" y2="140" stroke="#D4AF37" stroke-width="7"/>
+  <line x1="44" y1="88" x2="78" y2="88" stroke="#D4AF37" stroke-width="7"/>
+  <line x1="114" y1="88" x2="148" y2="88" stroke="#D4AF37" stroke-width="7"/>
+  <text x="96" y="166" text-anchor="middle" font-family="system-ui,sans-serif" font-weight="800" font-size="22" letter-spacing="2" fill="#D4AF37">2026</text>
+</svg>

@@ -1,0 +1,12 @@
+{
+  "name": "Mundial 2026",
+  "short_name": "Mundial",
+  "description": "Fixture y canales del Mundial FIFA 2026",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#D4AF37",
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
