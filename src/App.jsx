@@ -50,7 +50,7 @@ export default function App() {
   }, [autoExpandId]);
 
   return (
-    <div style={{ minHeight: '100svh', background: '#000' }}>
+    <div style={{ minHeight: '100vh', background: '#000' }}>
       <Header
         country={country}
         matchCount={matches.length}

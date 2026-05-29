@@ -13,7 +13,10 @@ const STATUS_LABEL = {
 export default function MatchCard({ match, timezone, selectedCountry, autoExpand, reminders }) {
   const [expanded, setExpanded] = useState(autoExpand ?? false);
   const [showReminderMenu, setShowReminderMenu] = useState(false);
-  const [notifStatus, setNotifStatus] = useState(Notification?.permission ?? 'default');
+  const [notifStatus, setNotifStatus] = useState(() => {
+    try { return (typeof Notification !== 'undefined') ? Notification.permission : 'unsupported'; }
+    catch { return 'unsupported'; }
+  });
   const cardRef = useRef(null);
   const bellRef = useRef(null);
 
@@ -42,7 +45,7 @@ export default function MatchCard({ match, timezone, selectedCountry, autoExpand
 
   async function requestAndSchedule(minutesBefore) {
     setShowReminderMenu(false);
-    if (!('Notification' in window)) return;
+    if (typeof Notification === 'undefined') return;
 
     let perm = Notification.permission;
     if (perm === 'default') {
