@@ -31,7 +31,7 @@ export default function MatchCard({ match, timezone, selectedCountry, autoExpand
   }, [autoExpand]);
 
   const date = new Date(utcDate);
-  const timeStr = date.toLocaleTimeString('es', { timeZone: timezone, hour: '2-digit', minute: '2-digit' });
+  const timeStr = date.toLocaleTimeString('es', { timeZone: timezone, hour: '2-digit', minute: '2-digit', hour12: true });
   const isLive = status === 'IN_PLAY' || status === 'PAUSED';
   const isFinished = status === 'FINISHED';
   const statusLabel = STATUS_LABEL[status];
