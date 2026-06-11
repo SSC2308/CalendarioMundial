@@ -1,179 +1,80 @@
 export const TEAM_NAMES_ES = {
-  // A
-  'Afghanistan': 'Afganistán',
-  'Albania': 'Albania',
-  'Algeria': 'Argelia',
-  'Andorra': 'Andorra',
-  'Angola': 'Angola',
-  'Argentina': 'Argentina',
-  'Armenia': 'Armenia',
-  'Australia': 'Australia',
-  'Austria': 'Austria',
+  // Grupo A
+  'Mexico':               'México',
+  'South Africa':         'Sudáfrica',
+  'Korea Republic':       'República de Corea',
+  'Czechia':              'Chequia',
+  'Czech Republic':       'Chequia',
 
-  // B
-  'Bahrain': 'Baréin',
-  'Bangladesh': 'Bangladés',
-  'Belgium': 'Bélgica',
-  'Bolivia': 'Bolivia',
+  // Grupo B
+  'Canada':               'Canadá',
   'Bosnia and Herzegovina': 'Bosnia y Herzegovina',
-  'Bosnia & Herzegovina': 'Bosnia y Herzegovina',
-  'Brazil': 'Brasil',
-  'Bulgaria': 'Bulgaria',
-  'Burkina Faso': 'Burkina Faso',
+  'Qatar':                'Catar',
+  'Switzerland':          'Suiza',
 
-  // C
-  'Cameroon': 'Camerún',
-  'Canada': 'Canadá',
-  'Chile': 'Chile',
-  'China': 'China',
-  "China PR": 'China',
-  'Colombia': 'Colombia',
-  'Congo': 'Congo',
-  'Costa Rica': 'Costa Rica',
-  'Croatia': 'Croacia',
-  'Cuba': 'Cuba',
-  'Czechia': 'República Checa',
-  'Czech Republic': 'República Checa',
+  // Grupo C
+  'Brazil':               'Brasil',
+  'Morocco':              'Marruecos',
+  'Haiti':                'Haití',
+  'Scotland':             'Escocia',
 
-  // D
-  'Denmark': 'Dinamarca',
+  // Grupo D
+  'United States':        'EE. UU.',
+  'Paraguay':             'Paraguay',
+  'Australia':            'Australia',
+  'Türkiye':              'Turquía',
+  'Turkey':               'Turquía',
 
-  // E
-  'Ecuador': 'Ecuador',
-  'Egypt': 'Egipto',
-  'El Salvador': 'El Salvador',
-  'England': 'Inglaterra',
-  'Estonia': 'Estonia',
-  'Ethiopia': 'Etiopía',
+  // Grupo E
+  'Germany':              'Alemania',
+  'Curaçao':              'Curazao',
+  'Curacao':              'Curazao',
+  "Côte d'Ivoire":        'Costa de Marfil',
+  'Ivory Coast':          'Costa de Marfil',
+  'Ecuador':              'Ecuador',
 
-  // F
-  'Finland': 'Finlandia',
-  'France': 'Francia',
+  // Grupo F
+  'Netherlands':          'Países Bajos',
+  'Japan':                'Japón',
+  'Sweden':               'Suecia',
+  'Tunisia':              'Túnez',
 
-  // G
-  'Gabon': 'Gabón',
-  'Georgia': 'Georgia',
-  'Germany': 'Alemania',
-  'Ghana': 'Ghana',
-  'Greece': 'Grecia',
-  'Guatemala': 'Guatemala',
-  'Guinea': 'Guinea',
+  // Grupo G
+  'Belgium':              'Bélgica',
+  'Egypt':                'Egipto',
+  'Iran':                 'RI de Irán',
+  'New Zealand':          'Nueva Zelanda',
 
-  // H
-  'Haiti': 'Haití',
-  'Honduras': 'Honduras',
-  'Hungary': 'Hungría',
+  // Grupo H
+  'Spain':                'España',
+  'Cape Verde':           'Islas de Cabo Verde',
+  'Saudi Arabia':         'Arabia Saudí',
+  'Uruguay':              'Uruguay',
 
-  // I
-  'Iceland': 'Islandia',
-  'India': 'India',
-  'Indonesia': 'Indonesia',
-  'Iran': 'Irán',
-  'Iraq': 'Irak',
-  'Ireland': 'Irlanda',
-  'Israel': 'Israel',
-  'Italy': 'Italia',
-  'Ivory Coast': 'Costa de Marfil',
-  "Côte d'Ivoire": 'Costa de Marfil',
+  // Grupo I
+  'France':               'Francia',
+  'Senegal':              'Senegal',
+  'Iraq':                 'Irak',
+  'Norway':               'Noruega',
 
-  // J
-  'Jamaica': 'Jamaica',
-  'Japan': 'Japón',
-  'Jordan': 'Jordania',
+  // Grupo J
+  'Argentina':            'Argentina',
+  'Algeria':              'Argelia',
+  'Austria':              'Austria',
+  'Jordan':               'Jordania',
 
-  // K
-  'Kazakhstan': 'Kazajistán',
-  'Kenya': 'Kenia',
-  'Kuwait': 'Kuwait',
+  // Grupo K
+  'Portugal':             'Portugal',
+  'DR Congo':             'RD Congo',
+  'Congo DR':             'RD Congo',
+  'Uzbekistan':           'Uzbekistán',
+  'Colombia':             'Colombia',
 
-  // L
-  'Lebanon': 'Líbano',
-  'Libya': 'Libia',
-
-  // M
-  'Malaysia': 'Malasia',
-  'Mali': 'Mali',
-  'Malta': 'Malta',
-  'Mexico': 'México',
-  'Moldova': 'Moldavia',
-  'Montenegro': 'Montenegro',
-  'Morocco': 'Marruecos',
-  'Mozambique': 'Mozambique',
-
-  // N
-  'Netherlands': 'Países Bajos',
-  'New Zealand': 'Nueva Zelanda',
-  'Nicaragua': 'Nicaragua',
-  'Nigeria': 'Nigeria',
-  'North Korea': 'Corea del Norte',
-  "Korea DPR": 'Corea del Norte',
-  'North Macedonia': 'Macedonia del Norte',
-  'Norway': 'Noruega',
-
-  // O
-  'Oman': 'Omán',
-
-  // P
-  'Pakistan': 'Pakistán',
-  'Palestine': 'Palestina',
-  'Panama': 'Panamá',
-  'Paraguay': 'Paraguay',
-  'Peru': 'Perú',
-  'Philippines': 'Filipinas',
-  'Poland': 'Polonia',
-  'Portugal': 'Portugal',
-
-  // Q
-  'Qatar': 'Catar',
-
-  // R
-  'Romania': 'Rumanía',
-  'Russia': 'Rusia',
-
-  // S
-  'Saudi Arabia': 'Arabia Saudita',
-  'Scotland': 'Escocia',
-  'Senegal': 'Senegal',
-  'Serbia': 'Serbia',
-  'Slovakia': 'Eslovaquia',
-  'Slovenia': 'Eslovenia',
-  'Somalia': 'Somalia',
-  'South Africa': 'Sudáfrica',
-  'South Korea': 'Corea del Sur',
-  'Korea Republic': 'Corea del Sur',
-  'Spain': 'España',
-  'Sudan': 'Sudán',
-  'Sweden': 'Suecia',
-  'Switzerland': 'Suiza',
-  'Syria': 'Siria',
-
-  // T
-  'Tanzania': 'Tanzania',
-  'Thailand': 'Tailandia',
-  'Trinidad and Tobago': 'Trinidad y Tobago',
-  'Tunisia': 'Túnez',
-  'Turkey': 'Turquía',
-  'Türkiye': 'Turquía',
-
-  // U
-  'Uganda': 'Uganda',
-  'Ukraine': 'Ucrania',
-  'United Arab Emirates': 'Emiratos Árabes Unidos',
-  'United States': 'Estados Unidos',
-  'USA': 'Estados Unidos',
-  'Uruguay': 'Uruguay',
-  'Uzbekistan': 'Uzbekistán',
-
-  // V
-  'Venezuela': 'Venezuela',
-  'Vietnam': 'Vietnam',
-
-  // W
-  'Wales': 'Gales',
-
-  // Z
-  'Zambia': 'Zambia',
-  'Zimbabwe': 'Zimbabue',
+  // Grupo L
+  'England':              'Inglaterra',
+  'Croatia':              'Croacia',
+  'Ghana':                'Ghana',
+  'Panama':               'Panamá',
 };
 
 export function getTeamName(name) {
