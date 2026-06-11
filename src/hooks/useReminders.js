@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { getTeamName } from '../data/teamNames';
 
 function loadReminders() {
   try { return JSON.parse(localStorage.getItem('reminders') || '{}'); }
@@ -21,8 +22,8 @@ export function useReminders() {
     const notifyAt = new Date(match.utcDate).getTime() - minutesBefore * 60 * 1000;
     const entry = {
       matchId: match.id,
-      homeTeam: match.homeTeam?.name ?? 'TBD',
-      awayTeam: match.awayTeam?.name ?? 'TBD',
+      homeTeam: getTeamName(match.homeTeam?.name ?? 'TBD'),
+      awayTeam: getTeamName(match.awayTeam?.name ?? 'TBD'),
       utcDate: match.utcDate,
       minutesBefore,
       notifyAt,

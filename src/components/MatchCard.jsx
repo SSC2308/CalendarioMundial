@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { COUNTRIES, SPANISH_COUNTRIES, ENGLISH_COUNTRIES } from '../data/broadcasts';
 import { getFlagUrl } from '../data/flags';
 import ReminderDropdown from './ReminderDropdown';
+import { getTeamName } from '../data/teamNames';
 
 const STATUS_LABEL = {
   SCHEDULED: null, TIMED: null,
@@ -143,7 +144,7 @@ export default function MatchCard({ match, timezone, selectedCountry, autoExpand
 
         {/* Teams + Score */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <TeamSide name={homeTeam?.name} crest={homeTeam?.crest} align="left" />
+          <TeamSide name={getTeamName(homeTeam?.name)} crest={homeTeam?.crest} align="left" />
           <div style={{ textAlign: 'center', minWidth: 60, flexShrink: 0 }}>
             {isFinished || isLive ? (
               <span style={{ fontSize: 26, fontWeight: 800, color: 'var(--gold)', letterSpacing: -1, fontVariantNumeric: 'tabular-nums' }}>
@@ -153,7 +154,7 @@ export default function MatchCard({ match, timezone, selectedCountry, autoExpand
               <span style={{ fontSize: 13, fontWeight: 500, color: 'rgba(255,255,255,0.2)' }}>vs</span>
             )}
           </div>
-          <TeamSide name={awayTeam?.name} crest={awayTeam?.crest} align="right" />
+          <TeamSide name={getTeamName(awayTeam?.name)} crest={awayTeam?.crest} align="right" />
         </div>
 
         {/* My channels */}
