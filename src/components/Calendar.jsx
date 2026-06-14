@@ -1,19 +1,23 @@
 import { useMemo, useState } from 'react';
 import MatchCard from './MatchCard';
+import GroupStandings from './GroupStandings';
 
 const STAGES = [
-  { key: 'all', label: 'Todos' },
-  { key: 'GROUP_STAGE', label: 'Grupos' },
-  { key: 'ROUND_OF_16', label: 'Octavos' },
-  { key: 'QUARTER_FINALS', label: 'Cuartos' },
-  { key: 'SEMI_FINALS', label: 'Semis' },
-  { key: 'FINAL', label: 'Final' },
+  { key: 'all',           label: 'Todos'     },
+  { key: 'GROUP_STAGE',   label: 'Grupos'    },
+  { key: 'tabla',         label: 'Tabla'     },
+  { key: 'ROUND_OF_32',   label: 'Ronda 32'  },
+  { key: 'ROUND_OF_16',   label: 'Octavos'   },
+  { key: 'QUARTER_FINALS',label: 'Cuartos'   },
+  { key: 'SEMI_FINALS',   label: 'Semis'     },
+  { key: 'FINAL',         label: 'Final'     },
 ];
 
 export default function Calendar({ matches, timezone, selectedCountry, autoExpandId, reminders }) {
   const [stageFilter, setStageFilter] = useState('all');
 
   const grouped = useMemo(() => {
+    if (stageFilter === 'tabla') return {};
     const filtered = stageFilter === 'all'
       ? matches
       : matches.filter((m) => m.stage === stageFilter);
@@ -32,14 +36,18 @@ export default function Calendar({ matches, timezone, selectedCountry, autoExpan
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
 
-      {/* iOS Segmented Control */}
+      {/* Tab bar — scrollable horizontally on mobile */}
       <div style={{
         display: 'flex',
         background: 'rgba(255,255,255,0.06)',
         borderRadius: 10,
         padding: 3,
         gap: 2,
+        overflowX: 'auto',
+        scrollbarWidth: 'none',
+        WebkitOverflowScrolling: 'touch',
       }}>
+        <style>{`::-webkit-scrollbar { display: none; }`}</style>
         {STAGES.map((s) => {
           const active = stageFilter === s.key;
           return (
@@ -47,7 +55,8 @@ export default function Calendar({ matches, timezone, selectedCountry, autoExpan
               key={s.key}
               onClick={() => setStageFilter(s.key)}
               style={{
-                flex: 1, padding: '6px 4px',
+                flexShrink: 0,
+                padding: '6px 10px',
                 borderRadius: 8, border: 'none', cursor: 'pointer',
                 fontSize: 12, fontWeight: active ? 600 : 400,
                 letterSpacing: -0.1,
@@ -63,43 +72,48 @@ export default function Calendar({ matches, timezone, selectedCountry, autoExpan
         })}
       </div>
 
-      {days.length === 0 && (
-        <p style={{ textAlign: 'center', padding: '48px 0', color: 'rgba(255,255,255,0.2)', margin: 0 }}>
-          No hay partidos en esta fase.
-        </p>
-      )}
+      {stageFilter === 'tabla' ? (
+        <GroupStandings matches={matches} />
+      ) : (
+        <>
+          {days.length === 0 && (
+            <p style={{ textAlign: 'center', padding: '48px 0', color: 'rgba(255,255,255,0.2)', margin: 0 }}>
+              No hay partidos en esta fase.
+            </p>
+          )}
 
-      {days.map(([day, dayMatches]) => (
-        <section key={day}>
-          {/* Section header iOS style */}
-          <div style={{
-            fontSize: 13, fontWeight: 600, letterSpacing: 0.1,
-            color: 'rgba(255,255,255,0.35)',
-            textTransform: 'uppercase',
-            marginBottom: 10,
-            paddingLeft: 4,
-          }}>
-            {day}
-          </div>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-            gap: 10,
-            alignItems: 'start',
-          }}>
-            {dayMatches.map((match) => (
-              <MatchCard
-                key={match.id}
-                match={match}
-                timezone={timezone}
-                selectedCountry={selectedCountry}
-                autoExpand={match.id === autoExpandId}
-                reminders={reminders}
-              />
-            ))}
-          </div>
-        </section>
-      ))}
+          {days.map(([day, dayMatches]) => (
+            <section key={day}>
+              <div style={{
+                fontSize: 13, fontWeight: 600, letterSpacing: 0.1,
+                color: 'rgba(255,255,255,0.35)',
+                textTransform: 'uppercase',
+                marginBottom: 10,
+                paddingLeft: 4,
+              }}>
+                {day}
+              </div>
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+                gap: 10,
+                alignItems: 'start',
+              }}>
+                {dayMatches.map((match) => (
+                  <MatchCard
+                    key={match.id}
+                    match={match}
+                    timezone={timezone}
+                    selectedCountry={selectedCountry}
+                    autoExpand={match.id === autoExpandId}
+                    reminders={reminders}
+                  />
+                ))}
+              </div>
+            </section>
+          ))}
+        </>
+      )}
     </div>
   );
 }
