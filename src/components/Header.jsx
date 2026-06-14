@@ -102,7 +102,7 @@ export default function Header({ country, matchCount, onSettingsClick }) {
             <div style={{ width: 1, height: 24, background: 'rgba(255,255,255,0.1)' }} />
             <Stat value={48} label="Grupos" suffix="×" prefix />
             <div style={{ width: 1, height: 24, background: 'rgba(255,255,255,0.1)' }} />
-            <Stat value={16} label="Eliminatoria" />
+            <Stat value={16} label="Estadios" />
           </div>
         )}
 
