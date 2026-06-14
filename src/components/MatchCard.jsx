@@ -3,6 +3,7 @@ import { COUNTRIES, SPANISH_COUNTRIES, ENGLISH_COUNTRIES } from '../data/broadca
 import { getFlagUrl } from '../data/flags';
 import ReminderDropdown from './ReminderDropdown';
 import { getTeamName } from '../data/teamNames';
+import { getVenueCity } from '../data/venues';
 
 const STATUS_LABEL = {
   SCHEDULED: null, TIMED: null,
@@ -176,8 +177,15 @@ export default function MatchCard({ match, timezone, selectedCountry, autoExpand
           onClick={(e) => e.stopPropagation()}
         >
           {(venue || referees?.length > 0) && (
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, fontSize: 12, color: 'rgba(255,255,255,0.3)' }}>
-              {venue && <span>📍 {venue}</span>}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 12, color: 'rgba(255,255,255,0.3)' }}>
+              {venue && (
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
+                  <span>🏟️ {venue}</span>
+                  {getVenueCity(venue) && (
+                    <span style={{ color: 'rgba(255,255,255,0.18)', fontSize: 11 }}>— {getVenueCity(venue)}</span>
+                  )}
+                </div>
+              )}
               {referees?.[0] && <span>🟨 {referees[0].name}</span>}
             </div>
           )}
