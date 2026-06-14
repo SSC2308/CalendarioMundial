@@ -144,7 +144,7 @@ export default function MatchCard({ match, timezone, selectedCountry, autoExpand
 
         {/* Teams + Score */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <TeamSide name={getTeamName(homeTeam?.name)} crest={homeTeam?.crest} align="left" />
+          <TeamSide name={getTeamName(homeTeam?.name)} apiName={homeTeam?.name} crest={homeTeam?.crest} align="left" />
           <div style={{ textAlign: 'center', minWidth: 60, flexShrink: 0 }}>
             {isFinished || isLive ? (
               <span style={{ fontSize: 26, fontWeight: 800, color: 'var(--gold)', letterSpacing: -1, fontVariantNumeric: 'tabular-nums' }}>
@@ -154,7 +154,7 @@ export default function MatchCard({ match, timezone, selectedCountry, autoExpand
               <span style={{ fontSize: 13, fontWeight: 500, color: 'rgba(255,255,255,0.2)' }}>vs</span>
             )}
           </div>
-          <TeamSide name={getTeamName(awayTeam?.name)} crest={awayTeam?.crest} align="right" />
+          <TeamSide name={getTeamName(awayTeam?.name)} apiName={awayTeam?.name} crest={awayTeam?.crest} align="right" />
         </div>
 
         {/* My channels */}
@@ -227,9 +227,9 @@ function ChannelGroup({ label, countries, selected }) {
   );
 }
 
-function TeamSide({ name, crest, align }) {
+function TeamSide({ name, apiName, crest, align }) {
   const isRight = align === 'right';
-  const flagUrl = getFlagUrl(name);
+  const flagUrl = getFlagUrl(apiName ?? name);
   const [useFallback, setUseFallback] = useState(false);
 
   const showFlag = flagUrl && !useFallback;
