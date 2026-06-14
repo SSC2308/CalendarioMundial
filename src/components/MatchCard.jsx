@@ -158,6 +158,15 @@ export default function MatchCard({ match, timezone, selectedCountry, autoExpand
           <TeamSide name={getTeamName(awayTeam?.name)} apiName={awayTeam?.name} crest={awayTeam?.crest} align="right" />
         </div>
 
+        {/* Venue */}
+        {venue && (
+          <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)', display: 'flex', alignItems: 'center', gap: 4 }}>
+            <span>🏟️</span>
+            <span>{venue}</span>
+            {getVenueCity(venue) && <span style={{ color: 'rgba(255,255,255,0.15)' }}>— {getVenueCity(venue)}</span>}
+          </div>
+        )}
+
         {/* My channels */}
         {myChannels.length > 0 && (
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, paddingTop: 10, borderTop: '0.5px solid rgba(255,255,255,0.07)' }}>
@@ -176,17 +185,9 @@ export default function MatchCard({ match, timezone, selectedCountry, autoExpand
           style={{ borderTop: '0.5px solid rgba(255,255,255,0.07)', padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: 16, background: 'rgba(0,0,0,0.25)' }}
           onClick={(e) => e.stopPropagation()}
         >
-          {(venue || referees?.length > 0) && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 12, color: 'rgba(255,255,255,0.3)' }}>
-              {venue && (
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
-                  <span>🏟️ {venue}</span>
-                  {getVenueCity(venue) && (
-                    <span style={{ color: 'rgba(255,255,255,0.18)', fontSize: 11 }}>— {getVenueCity(venue)}</span>
-                  )}
-                </div>
-              )}
-              {referees?.[0] && <span>🟨 {referees[0].name}</span>}
+          {referees?.length > 0 && (
+            <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)' }}>
+              <span>🟨 {referees[0].name}</span>
             </div>
           )}
           <div>
