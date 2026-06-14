@@ -3,6 +3,7 @@ import { COUNTRIES, SPANISH_COUNTRIES, ENGLISH_COUNTRIES } from '../data/broadca
 import { getFlagUrl } from '../data/flags';
 import ReminderDropdown from './ReminderDropdown';
 import { getTeamName } from '../data/teamNames';
+import { getMatchVenue } from '../data/matchVenues';
 
 const STATUS_LABEL = {
   SCHEDULED: null, TIMED: null,
@@ -22,6 +23,7 @@ export default function MatchCard({ match, timezone, selectedCountry, autoExpand
   const bellRef = useRef(null);
 
   const { homeTeam, awayTeam, utcDate, status, score, stage, group, referees } = match;
+  const venue = getMatchVenue(homeTeam?.name, awayTeam?.name);
   const isPast = new Date(utcDate) < new Date();
 
   // Auto-scroll to this card when opened via notification
@@ -156,6 +158,15 @@ export default function MatchCard({ match, timezone, selectedCountry, autoExpand
           </div>
           <TeamSide name={getTeamName(awayTeam?.name)} apiName={awayTeam?.name} crest={awayTeam?.crest} align="right" />
         </div>
+
+        {/* Venue */}
+        {venue && (
+          <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)', display: 'flex', alignItems: 'center', gap: 4 }}>
+            <span>🏟️</span>
+            <span>{venue.stadium}</span>
+            <span style={{ color: 'rgba(255,255,255,0.15)' }}>— {venue.city}</span>
+          </div>
+        )}
 
         {/* My channels */}
         {myChannels.length > 0 && (
