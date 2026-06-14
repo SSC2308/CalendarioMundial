@@ -2,20 +2,26 @@
 // Clave: "homeTeam|awayTeam" con los nombres exactos de la API (inglés)
 const VENUES = {
   // ── GRUPO A ──
-  'Mexico|South Africa':        { stadium: 'Estadio Azteca',           city: 'Ciudad de México' },
-  'Korea Republic|Czechia':     { stadium: 'Estadio Akron',            city: 'Guadalajara' },
-  'Czechia|South Africa':       { stadium: 'Mercedes-Benz Stadium',    city: 'Atlanta' },
-  'Mexico|Korea Republic':      { stadium: 'Estadio Akron',            city: 'Guadalajara' },
-  'Czechia|Mexico':             { stadium: 'Estadio Azteca',           city: 'Ciudad de México' },
-  'South Africa|Korea Republic':{ stadium: 'Estadio BBVA',             city: 'Monterrey' },
+  'Mexico|South Africa':         { stadium: 'Estadio Azteca',          city: 'Ciudad de México' },
+  'Korea Republic|Czechia':      { stadium: 'Estadio Akron',           city: 'Guadalajara' },
+  'South Korea|Czechia':         { stadium: 'Estadio Akron',           city: 'Guadalajara' },
+  'Czechia|South Africa':        { stadium: 'Mercedes-Benz Stadium',   city: 'Atlanta' },
+  'Mexico|Korea Republic':       { stadium: 'Estadio Akron',           city: 'Guadalajara' },
+  'Mexico|South Korea':          { stadium: 'Estadio Akron',           city: 'Guadalajara' },
+  'Czechia|Mexico':              { stadium: 'Estadio Azteca',          city: 'Ciudad de México' },
+  'South Africa|Korea Republic': { stadium: 'Estadio BBVA',            city: 'Monterrey' },
+  'South Africa|South Korea':    { stadium: 'Estadio BBVA',            city: 'Monterrey' },
 
   // ── GRUPO B ──
-  'Canada|Bosnia and Herzegovina': { stadium: 'BMO Field',            city: 'Toronto' },
-  'Qatar|Switzerland':             { stadium: "Levi's Stadium",        city: 'Santa Clara' },
+  'Canada|Bosnia and Herzegovina':  { stadium: 'BMO Field',           city: 'Toronto' },
+  'Canada|Bosnia-Herzegovina':      { stadium: 'BMO Field',           city: 'Toronto' },
+  'Qatar|Switzerland':              { stadium: "Levi's Stadium",       city: 'Santa Clara' },
   'Switzerland|Bosnia and Herzegovina': { stadium: 'SoFi Stadium',   city: 'Los Ángeles' },
-  'Canada|Qatar':                  { stadium: 'BC Place',              city: 'Vancouver' },
-  'Switzerland|Canada':            { stadium: 'BC Place',              city: 'Vancouver' },
-  'Bosnia and Herzegovina|Qatar':  { stadium: 'Lumen Field',           city: 'Seattle' },
+  'Switzerland|Bosnia-Herzegovina': { stadium: 'SoFi Stadium',        city: 'Los Ángeles' },
+  'Canada|Qatar':                   { stadium: 'BC Place',             city: 'Vancouver' },
+  'Switzerland|Canada':             { stadium: 'BC Place',             city: 'Vancouver' },
+  'Bosnia and Herzegovina|Qatar':   { stadium: 'Lumen Field',          city: 'Seattle' },
+  'Bosnia-Herzegovina|Qatar':       { stadium: 'Lumen Field',          city: 'Seattle' },
 
   // ── GRUPO C ──
   'Brazil|Morocco':             { stadium: 'MetLife Stadium',          city: 'Nueva York / Nueva Jersey' },
@@ -64,12 +70,15 @@ const VENUES = {
   'New Zealand|Belgium':        { stadium: 'BC Place',                 city: 'Vancouver' },
 
   // ── GRUPO H ──
-  'Spain|Cape Verde':           { stadium: 'Mercedes-Benz Stadium',   city: 'Atlanta' },
-  'Saudi Arabia|Uruguay':       { stadium: 'Hard Rock Stadium',        city: 'Miami' },
-  'Spain|Saudi Arabia':         { stadium: 'Mercedes-Benz Stadium',   city: 'Atlanta' },
-  'Uruguay|Cape Verde':         { stadium: 'Hard Rock Stadium',        city: 'Miami' },
-  'Cape Verde|Saudi Arabia':    { stadium: 'NRG Stadium',              city: 'Houston' },
-  'Uruguay|Spain':              { stadium: 'Estadio Akron',            city: 'Guadalajara' },
+  'Spain|Cape Verde':              { stadium: 'Mercedes-Benz Stadium', city: 'Atlanta' },
+  'Spain|Cape Verde Islands':      { stadium: 'Mercedes-Benz Stadium', city: 'Atlanta' },
+  'Saudi Arabia|Uruguay':          { stadium: 'Hard Rock Stadium',     city: 'Miami' },
+  'Spain|Saudi Arabia':            { stadium: 'Mercedes-Benz Stadium', city: 'Atlanta' },
+  'Uruguay|Cape Verde':            { stadium: 'Hard Rock Stadium',     city: 'Miami' },
+  'Uruguay|Cape Verde Islands':    { stadium: 'Hard Rock Stadium',     city: 'Miami' },
+  'Cape Verde|Saudi Arabia':       { stadium: 'NRG Stadium',           city: 'Houston' },
+  'Cape Verde Islands|Saudi Arabia': { stadium: 'NRG Stadium',         city: 'Houston' },
+  'Uruguay|Spain':                 { stadium: 'Estadio Akron',         city: 'Guadalajara' },
 
   // ── GRUPO I ──
   'France|Senegal':             { stadium: 'MetLife Stadium',          city: 'Nueva York / Nueva Jersey' },

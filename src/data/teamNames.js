@@ -3,12 +3,14 @@ export const TEAM_NAMES_ES = {
   'Mexico':               'México',
   'South Africa':         'Sudáfrica',
   'Korea Republic':       'República de Corea',
+  'South Korea':          'República de Corea',
   'Czechia':              'Chequia',
   'Czech Republic':       'Chequia',
 
   // Grupo B
   'Canada':               'Canadá',
   'Bosnia and Herzegovina': 'Bosnia y Herzegovina',
+  'Bosnia-Herzegovina':   'Bosnia y Herzegovina',
   'Qatar':                'Catar',
   'Switzerland':          'Suiza',
 
@@ -48,6 +50,7 @@ export const TEAM_NAMES_ES = {
   // Grupo H
   'Spain':                'España',
   'Cape Verde':           'Islas de Cabo Verde',
+  'Cape Verde Islands':   'Islas de Cabo Verde',
   'Saudi Arabia':         'Arabia Saudí',
   'Uruguay':              'Uruguay',
 
