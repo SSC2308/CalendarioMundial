@@ -4,7 +4,6 @@ import GroupStandings from './GroupStandings';
 
 const STAGES = [
   { key: 'all',           label: 'Todos'     },
-  { key: 'GROUP_STAGE',   label: 'Grupos'    },
   { key: 'tabla',         label: 'Tabla'     },
   { key: 'ROUND_OF_32',   label: 'Ronda 32'  },
   { key: 'ROUND_OF_16',   label: 'Octavos'   },
