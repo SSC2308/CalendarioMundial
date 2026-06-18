@@ -12,6 +12,12 @@ const STAGES = [
   { key: 'FINAL',         label: 'Final'     },
 ];
 
+function todayId(timezone) {
+  return new Date().toLocaleDateString('es', {
+    timeZone: timezone, weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+  });
+}
+
 export default function Calendar({ matches, timezone, selectedCountry, autoExpandId, reminders }) {
   const [stageFilter, setStageFilter] = useState('all');
 
@@ -31,11 +37,22 @@ export default function Calendar({ matches, timezone, selectedCountry, autoExpan
   }, [matches, stageFilter, timezone]);
 
   const days = Object.entries(grouped);
+  const today = todayId(timezone);
+  const hasToday = days.some(([day]) => day === today);
+
+  function scrollToToday() {
+    if (stageFilter !== 'all') setStageFilter('all');
+    // pequeño delay para que React re-renderice si cambió el filtro
+    setTimeout(() => {
+      const el = document.getElementById(`day-${today}`);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50);
+  }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
 
-      {/* Tab bar — scrollable horizontally on mobile */}
+      {/* Tab bar */}
       <div style={{
         display: 'flex',
         background: 'rgba(255,255,255,0.06)',
@@ -82,15 +99,25 @@ export default function Calendar({ matches, timezone, selectedCountry, autoExpan
           )}
 
           {days.map(([day, dayMatches]) => (
-            <section key={day}>
+            <section key={day} id={`day-${day}`}>
               <div style={{
                 fontSize: 13, fontWeight: 600, letterSpacing: 0.1,
-                color: 'rgba(255,255,255,0.35)',
+                color: day === today ? 'var(--gold)' : 'rgba(255,255,255,0.35)',
                 textTransform: 'uppercase',
                 marginBottom: 10,
                 paddingLeft: 4,
+                display: 'flex', alignItems: 'center', gap: 8,
               }}>
                 {day}
+                {day === today && (
+                  <span style={{
+                    fontSize: 10, fontWeight: 700, padding: '2px 7px',
+                    borderRadius: 20, background: 'var(--gold)', color: '#000',
+                    letterSpacing: 0.5,
+                  }}>
+                    HOY
+                  </span>
+                )}
               </div>
               <div style={{
                 display: 'grid',
@@ -112,6 +139,42 @@ export default function Calendar({ matches, timezone, selectedCountry, autoExpan
             </section>
           ))}
         </>
+      )}
+
+      {/* Floating "Hoy" button */}
+      {hasToday && (
+        <button
+          onClick={scrollToToday}
+          style={{
+            position: 'fixed',
+            bottom: 28,
+            right: 20,
+            zIndex: 100,
+            padding: '10px 18px',
+            borderRadius: 40,
+            border: '0.5px solid rgba(212,175,55,0.4)',
+            background: 'rgba(10,8,0,0.85)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
+            color: 'var(--gold)',
+            fontSize: 13,
+            fontWeight: 700,
+            letterSpacing: 0.3,
+            cursor: 'pointer',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.6), 0 0 12px rgba(212,175,55,0.15)',
+            transition: 'transform 0.15s, box-shadow 0.15s',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'scale(1.05)';
+            e.currentTarget.style.boxShadow = '0 6px 24px rgba(0,0,0,0.7), 0 0 16px rgba(212,175,55,0.25)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'scale(1)';
+            e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.6), 0 0 12px rgba(212,175,55,0.15)';
+          }}
+        >
+          ◎ Hoy
+        </button>
       )}
     </div>
   );
