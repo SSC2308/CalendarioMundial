@@ -119,14 +119,19 @@ export default function GroupStandings({ matches }) {
             <tbody>
               {group.teams.map((team, i) => {
                 const flagUrl = getFlagUrl(team.name);
-                const isQualified = i < 2;
+                // 1°/2°: clasifican directo | 3°: posible (8 mejores terceros) | 4°: eliminado
+                const zone = i < 2 ? 'qualify' : i === 2 ? 'possible' : 'out';
+                const zoneBg    = { qualify: 'rgba(52,199,89,0.07)',  possible: 'rgba(255,214,10,0.06)',  out: 'rgba(255,59,48,0.06)'  }[zone];
+                const zoneColor = { qualify: 'rgba(52,199,89,0.9)',   possible: 'rgba(255,214,10,0.85)',  out: 'rgba(255,100,90,0.85)' }[zone];
+                const dotColor  = { qualify: '#34c759',               possible: '#ffd60a',                out: '#ff3b30'               }[zone];
                 return (
                   <tr key={team.name} style={{
                     borderTop: i > 0 ? '0.5px solid rgba(255,255,255,0.05)' : 'none',
-                    background: isQualified ? 'rgba(212,175,55,0.04)' : 'transparent',
+                    background: zoneBg,
                   }}>
-                    <td style={{ padding: '8px 8px 8px 14px' }}>
+                    <td style={{ padding: '8px 8px 8px 10px' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                        <span style={{ width: 4, height: 28, borderRadius: 2, background: dotColor, flexShrink: 0 }} />
                         <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)', minWidth: 12 }}>{i + 1}</span>
                         {flagUrl && (
                           <img
@@ -135,7 +140,7 @@ export default function GroupStandings({ matches }) {
                             style={{ width: 20, height: 14, objectFit: 'cover', borderRadius: 2, flexShrink: 0 }}
                           />
                         )}
-                        <span style={{ fontSize: 13, color: isQualified ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.65)', fontWeight: isQualified ? 500 : 400 }}>
+                        <span style={{ fontSize: 13, color: zoneColor, fontWeight: i < 2 ? 500 : 400 }}>
                           {getTeamName(team.name)}
                         </span>
                       </div>
@@ -155,6 +160,20 @@ export default function GroupStandings({ matches }) {
           </table>
         </div>
       ))}
+
+      {/* Leyenda */}
+      <div style={{ display: 'flex', gap: 16, paddingLeft: 4, flexWrap: 'wrap' }}>
+        {[
+          { color: '#34c759', label: 'Clasifican a Ronda de 32' },
+          { color: '#ffd60a', label: 'Posible clasificación (mejor 3°)' },
+          { color: '#ff3b30', label: 'Eliminados' },
+        ].map(({ color, label }) => (
+          <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <span style={{ width: 8, height: 8, borderRadius: '50%', background: color, flexShrink: 0 }} />
+            <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)' }}>{label}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
