@@ -54,6 +54,7 @@ export default function App() {
       <Header
         country={country}
         matchCount={matches.length}
+        playedCount={matches.filter(m => m.status === 'FINISHED').length}
         onSettingsClick={() => setShowSettings(true)}
       />
 

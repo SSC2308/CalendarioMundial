@@ -8,7 +8,7 @@ const HOST_FLAGS = [
 
 const FLAG_BASE = 'https://play.fifa.com/media/image/bracket_predictor/flags/world_cup_2026';
 
-export default function Header({ country, matchCount, onSettingsClick }) {
+export default function Header({ country, matchCount, playedCount, onSettingsClick }) {
   const heroRef = useRef(null);
   const [collapsed, setCollapsed] = useState(false);
 
@@ -100,9 +100,11 @@ export default function Header({ country, matchCount, onSettingsClick }) {
           }}>
             <Stat value={matchCount} label="Partidos" />
             <div style={{ width: 1, height: 24, background: 'rgba(255,255,255,0.1)' }} />
-            <Stat value={48} label="Grupos" suffix="×" prefix />
+            <Stat value={48} label="Grupos" />
             <div style={{ width: 1, height: 24, background: 'rgba(255,255,255,0.1)' }} />
             <Stat value={16} label="Estadios" />
+            <div style={{ width: 1, height: 24, background: 'rgba(255,255,255,0.1)' }} />
+            <Stat value={matchCount - playedCount} label="Restantes" highlight />
           </div>
         )}
 
@@ -152,13 +154,13 @@ export default function Header({ country, matchCount, onSettingsClick }) {
   );
 }
 
-function Stat({ value, label }) {
+function Stat({ value, label, highlight }) {
   return (
     <div style={{ textAlign: 'center' }}>
-      <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--gold)', lineHeight: 1, letterSpacing: -0.5 }}>
+      <div style={{ fontSize: 18, fontWeight: 700, lineHeight: 1, letterSpacing: -0.5, color: highlight ? '#fff' : 'var(--gold)' }}>
         {value}
       </div>
-      <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', marginTop: 2, letterSpacing: 0.3, textTransform: 'uppercase' }}>
+      <div style={{ fontSize: 10, color: highlight ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.3)', marginTop: 2, letterSpacing: 0.3, textTransform: 'uppercase' }}>
         {label}
       </div>
     </div>
