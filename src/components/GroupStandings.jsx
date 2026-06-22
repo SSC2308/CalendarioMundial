@@ -110,9 +110,9 @@ export default function GroupStandings({ matches }) {
                 <th style={col.th}>G</th>
                 <th style={col.th}>E</th>
                 <th style={col.th}>P</th>
-                <th style={col.th}>GF</th>
-                <th style={col.th}>GC</th>
-                <th style={col.th}>DG</th>
+                <th className="col-hide-sm" style={col.th}>GF</th>
+                <th className="col-hide-sm" style={col.th}>GC</th>
+                <th className="col-hide-sm" style={col.th}>DG</th>
                 <th style={{ ...col.th, color: 'var(--gold)' }}>Pts</th>
               </tr>
             </thead>
@@ -149,9 +149,9 @@ export default function GroupStandings({ matches }) {
                     <td style={col.td}>{team.g}</td>
                     <td style={col.td}>{team.e}</td>
                     <td style={col.td}>{team.p}</td>
-                    <td style={col.td}>{team.gf}</td>
-                    <td style={col.td}>{team.gc}</td>
-                    <td style={col.td}>{team.gf - team.gc > 0 ? `+${team.gf - team.gc}` : team.gf - team.gc}</td>
+                    <td className="col-hide-sm" style={col.td}>{team.gf}</td>
+                    <td className="col-hide-sm" style={col.td}>{team.gc}</td>
+                    <td className="col-hide-sm" style={col.td}>{team.gf - team.gc > 0 ? `+${team.gf - team.gc}` : team.gf - team.gc}</td>
                     <td style={{ ...col.td, fontWeight: 700, color: 'var(--gold)' }}>{team.pts}</td>
                   </tr>
                 );

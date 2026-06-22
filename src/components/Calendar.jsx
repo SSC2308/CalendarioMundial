@@ -119,7 +119,7 @@ export default function Calendar({ matches, timezone, selectedCountry, autoExpan
                   </span>
                 )}
               </div>
-              <div style={{
+              <div className="matches-grid" style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
                 gap: 10,
@@ -144,6 +144,7 @@ export default function Calendar({ matches, timezone, selectedCountry, autoExpan
       {/* Floating "Hoy" button */}
       {hasToday && (
         <button
+          className="btn-hoy"
           onClick={scrollToToday}
           style={{
             position: 'fixed',

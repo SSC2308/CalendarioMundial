@@ -23,3 +23,44 @@ body {
 
 /* iOS-style smooth scrolling */
 ::-webkit-scrollbar { width: 0; }
+
+/* ── Responsive ── */
+
+/* Tabla de grupos: ocultar columnas secundarias en pantallas pequeñas */
+@media (max-width: 480px) {
+  .col-hide-sm { display: none; }
+}
+
+/* Cards grid: una columna en móvil pequeño */
+@media (max-width: 480px) {
+  .matches-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Stats strip del header: reducir gaps y texto en móvil */
+@media (max-width: 420px) {
+  .stats-strip {
+    gap: 12px !important;
+    padding: 7px 14px !important;
+  }
+  .stats-strip .stat-value {
+    font-size: 15px !important;
+  }
+  .stats-strip .stat-label {
+    font-size: 9px !important;
+  }
+  .stats-strip .stat-divider {
+    display: none;
+  }
+}
+
+/* Botón flotante Hoy: separarlo del borde en pantallas pequeñas */
+@media (max-width: 380px) {
+  .btn-hoy {
+    bottom: 16px !important;
+    right: 12px !important;
+    padding: 8px 14px !important;
+    font-size: 12px !important;
+  }
+}

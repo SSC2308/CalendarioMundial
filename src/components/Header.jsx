@@ -91,7 +91,7 @@ export default function Header({ country, matchCount, playedCount, onSettingsCli
 
         {/* Stats strip */}
         {matchCount > 0 && (
-          <div style={{
+          <div className="stats-strip" style={{
             display: 'inline-flex', alignItems: 'center', gap: 20,
             marginTop: 20, padding: '8px 20px',
             borderRadius: 40,
@@ -99,11 +99,11 @@ export default function Header({ country, matchCount, playedCount, onSettingsCli
             border: '0.5px solid rgba(255,255,255,0.1)',
           }}>
             <Stat value={matchCount} label="Partidos" />
-            <div style={{ width: 1, height: 24, background: 'rgba(255,255,255,0.1)' }} />
+            <div className="stat-divider" style={{ width: 1, height: 24, background: 'rgba(255,255,255,0.1)' }} />
             <Stat value={48} label="Grupos" />
-            <div style={{ width: 1, height: 24, background: 'rgba(255,255,255,0.1)' }} />
+            <div className="stat-divider" style={{ width: 1, height: 24, background: 'rgba(255,255,255,0.1)' }} />
             <Stat value={16} label="Estadios" />
-            <div style={{ width: 1, height: 24, background: 'rgba(255,255,255,0.1)' }} />
+            <div className="stat-divider" style={{ width: 1, height: 24, background: 'rgba(255,255,255,0.1)' }} />
             <Stat value={matchCount - playedCount} label="Restantes" highlight />
           </div>
         )}
@@ -157,10 +157,10 @@ export default function Header({ country, matchCount, playedCount, onSettingsCli
 function Stat({ value, label, highlight }) {
   return (
     <div style={{ textAlign: 'center' }}>
-      <div style={{ fontSize: 18, fontWeight: 700, lineHeight: 1, letterSpacing: -0.5, color: highlight ? '#fff' : 'var(--gold)' }}>
+      <div className="stat-value" style={{ fontSize: 18, fontWeight: 700, lineHeight: 1, letterSpacing: -0.5, color: highlight ? '#fff' : 'var(--gold)' }}>
         {value}
       </div>
-      <div style={{ fontSize: 10, color: highlight ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.3)', marginTop: 2, letterSpacing: 0.3, textTransform: 'uppercase' }}>
+      <div className="stat-label" style={{ fontSize: 10, color: highlight ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.3)', marginTop: 2, letterSpacing: 0.3, textTransform: 'uppercase' }}>
         {label}
       </div>
     </div>
