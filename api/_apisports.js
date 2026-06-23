@@ -20,6 +20,7 @@ const ALIAS = {
   cotedivoire: 'ivorycoast',
   capeverdeislands: 'capeverde',
   bosniaandherzegovina: 'bosniaherzegovina',
+  czechia: 'czechrepublic',
   drcongo: 'congodr',
   unitedstates: 'usa',
 };
@@ -46,7 +47,6 @@ export async function getGoals({ date, home, away, key: _key }) {
   const hC = canon(home), aC = canon(away);
 
   const match = matches.find((m) => {
-    if (m.date !== date) return false;
     const t1 = canon(m.team1), t2 = canon(m.team2);
     return (t1 === hC && t2 === aC) || (t1 === aC && t2 === hC);
   });
