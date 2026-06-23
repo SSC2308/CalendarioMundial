@@ -193,7 +193,7 @@ export default function MatchCard({ match, timezone, selectedCountry, autoExpand
           {(isFinished || isLive) && (
             <div>
               <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 0.8, color: 'rgba(212,175,55,0.5)', textTransform: 'uppercase', margin: '0 0 10px' }}>
-                Goleadores
+                Anotaciones
               </p>
               {scorersLoading ? (
                 <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.25)', margin: 0 }}>Cargando...</p>
@@ -203,7 +203,7 @@ export default function MatchCard({ match, timezone, selectedCountry, autoExpand
                   <GoalList team={awayTeam?.name ?? ''} goals={scorers.away} align="left" />
                 </div>
               ) : scorers && !scorers.found ? (
-                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.25)', margin: 0 }}>Sin datos de goleadores</p>
+                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.25)', margin: 0 }}>Sin anotaciones registradas</p>
               ) : null}
             </div>
           )}
