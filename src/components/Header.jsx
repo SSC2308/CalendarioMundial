@@ -100,7 +100,7 @@ export default function Header({ country, matchCount, playedCount, onSettingsCli
           }}>
             <Stat value={matchCount} label="Partidos" />
             <div className="stat-divider" style={{ width: 1, height: 24, background: 'rgba(255,255,255,0.1)' }} />
-            <Stat value={48} label="Grupos" />
+            <Stat value={48} label="Equipos" />
             <div className="stat-divider" style={{ width: 1, height: 24, background: 'rgba(255,255,255,0.1)' }} />
             <Stat value={16} label="Estadios" />
             <div className="stat-divider" style={{ width: 1, height: 24, background: 'rgba(255,255,255,0.1)' }} />
