@@ -4,6 +4,7 @@ import { getFlagUrl } from '../data/flags';
 import ReminderDropdown from './ReminderDropdown';
 import { getTeamName } from '../data/teamNames';
 import { getMatchVenue } from '../data/matchVenues';
+import { useScorers } from '../hooks/useScorers';
 
 const STATUS_LABEL = {
   SCHEDULED: null, TIMED: null,
@@ -59,6 +60,8 @@ export default function MatchCard({ match, timezone, selectedCountry, autoExpand
 
     reminders.setReminder(match, minutesBefore);
   }
+
+  const { data: scorers, loading: scorersLoading } = useScorers(match, expanded && (isFinished || isLive));
 
   function cancelReminder(e) {
     e.stopPropagation();
@@ -186,6 +189,25 @@ export default function MatchCard({ match, timezone, selectedCountry, autoExpand
           style={{ borderTop: '0.5px solid rgba(255,255,255,0.07)', padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: 16, background: 'rgba(0,0,0,0.25)' }}
           onClick={(e) => e.stopPropagation()}
         >
+          {/* Goal scorers */}
+          {(isFinished || isLive) && (
+            <div>
+              <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: 0.8, color: 'rgba(212,175,55,0.5)', textTransform: 'uppercase', margin: '0 0 10px' }}>
+                Goleadores
+              </p>
+              {scorersLoading ? (
+                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.25)', margin: 0 }}>Cargando...</p>
+              ) : scorers?.found ? (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  <GoalList team={homeTeam?.name ?? ''} goals={scorers.home} align="left" />
+                  <GoalList team={awayTeam?.name ?? ''} goals={scorers.away} align="left" />
+                </div>
+              ) : scorers && !scorers.found ? (
+                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.25)', margin: 0 }}>Sin datos de goleadores</p>
+              ) : null}
+            </div>
+          )}
+
           {referees?.length > 0 && (
             <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)' }}>
               <span>🟨 {referees[0].name}</span>
@@ -273,4 +295,25 @@ function TeamSide({ name, apiName, crest, align }) {
 function formatStage(stage) {
   const map = { GROUP_STAGE: 'Fase de Grupos', ROUND_OF_16: 'Octavos', QUARTER_FINALS: 'Cuartos', SEMI_FINALS: 'Semifinales', THIRD_PLACE: '3er Puesto', FINAL: 'Final' };
   return map[stage] ?? stage ?? '';
+}
+
+function GoalList({ team, goals, align }) {
+  if (!goals || goals.length === 0) return null;
+  return (
+    <div>
+      <p style={{ fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.35)', margin: '0 0 4px', textAlign: align }}>
+        {team}
+      </p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        {goals.map((g, i) => (
+          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, color: 'rgba(255,255,255,0.7)' }}>
+            <span style={{ color: 'rgba(255,255,255,0.3)', fontVariantNumeric: 'tabular-nums', minWidth: 22 }}>
+              {g.minute}{g.extra != null ? `+${g.extra}` : ''}'
+            </span>
+            <span>{g.own ? `⚽ ${g.player} (en contra)` : g.pen ? `⚽ ${g.player} (p)` : `⚽ ${g.player}`}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
