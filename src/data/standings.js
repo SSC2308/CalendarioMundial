@@ -67,36 +67,3 @@ export function computeStandings(matches) {
     }));
 }
 
-// Mapa { 'A': [teams ordenados], 'B': [...] } para resolver el bracket
-export function standingsByLetter(matches) {
-  const map = {};
-  for (const g of computeStandings(matches)) {
-    map[g.key.replace('GROUP_', '')] = g.teams;
-  }
-  return map;
-}
-
-// ¿Terminó toda la fase de grupos? (para saber si 1º/2º ya son definitivos)
-export function groupStageComplete(matches) {
-  const groupMatches = matches.filter((m) => m.stage === 'GROUP_STAGE');
-  return groupMatches.length > 0 && groupMatches.every((m) => m.status === 'FINISHED');
-}
-
-// Cantidad de partidos de grupos ya jugados (para saber si proyectar terceros)
-export function finishedGroupMatches(matches) {
-  return matches.filter((m) => m.stage === 'GROUP_STAGE' && m.status === 'FINISHED').length;
-}
-
-// Ranking de los 12 terceros, mejor primero (pts, DG, GF)
-export function thirdPlaceRanking(matches) {
-  return computeStandings(matches)
-    .filter((g) => g.teams.length >= 3)
-    .map((g) => ({ letter: g.key.replace('GROUP_', ''), team: g.teams[2] }))
-    .sort((a, b) => {
-      const A = a.team, B = b.team;
-      if (B.pts !== A.pts) return B.pts - A.pts;
-      const dA = A.gf - A.gc, dB = B.gf - B.gc;
-      if (dB !== dA) return dB - dA;
-      return B.gf - A.gf;
-    });
-}

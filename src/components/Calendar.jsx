@@ -93,7 +93,7 @@ export default function Calendar({ matches, timezone, selectedCountry, autoExpan
       {stageFilter === 'tabla' ? (
         <GroupStandings matches={matches} />
       ) : stageFilter === 'cruces' ? (
-        <Bracket matches={matches} />
+        <Bracket timezone={timezone} />
       ) : (
         <>
           {days.length === 0 && (
