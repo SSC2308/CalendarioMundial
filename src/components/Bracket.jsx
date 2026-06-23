@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
 import { getTeamName } from '../data/teamNames';
 import { getFlagUrl } from '../data/flags';
-import { standingsByLetter, groupStageComplete } from '../data/standings';
-import { ROUNDS } from '../data/bracket';
+import { standingsByLetter, groupStageComplete, thirdPlaceRanking, finishedGroupMatches } from '../data/standings';
+import { ROUNDS, assignThirdPlaces } from '../data/bracket';
 
 // Resuelve una referencia de slot a { team, label }
-function resolveSlot(ref, byLetter) {
+function resolveSlot(ref, ctx) {
   // Ganador / Perdedor de un partido
   if (ref[0] === 'W' || ref[0] === 'L') {
     const verb = ref[0] === 'W' ? 'Ganador' : 'Perdedor';
@@ -13,12 +13,16 @@ function resolveSlot(ref, byLetter) {
   }
   // Mejor tercero entre varios grupos
   if (ref.startsWith('3:')) {
+    const letter = ctx.thirdAssignment?.[ctx.matchNo];
+    if (letter && ctx.byLetter[letter]?.length >= 3) {
+      return { team: ctx.byLetter[letter][2], label: `3º Grupo ${letter}` };
+    }
     return { team: null, label: `3º (${ref.slice(2)})` };
   }
   // 1º o 2º de un grupo
   const pos = Number(ref[0]);
   const letter = ref.slice(1);
-  const teams = byLetter[letter];
+  const teams = ctx.byLetter[letter];
   const sub = `${pos}º Grupo ${letter}`;
   if (teams && teams.length >= pos) {
     return { team: teams[pos - 1], label: sub };
@@ -26,8 +30,8 @@ function resolveSlot(ref, byLetter) {
   return { team: null, label: sub };
 }
 
-function Slot({ slot, byLetter }) {
-  const { team, label } = resolveSlot(slot, byLetter);
+function Slot({ slot, ctx }) {
+  const { team, label } = resolveSlot(slot, ctx);
   const flagUrl = team ? getFlagUrl(team.name) : null;
 
   return (
@@ -49,7 +53,8 @@ function Slot({ slot, byLetter }) {
   );
 }
 
-function MatchCard({ match, byLetter }) {
+function MatchCard({ match, ctx }) {
+  const cctx = { ...ctx, matchNo: match.match };
   return (
     <div style={{
       background: 'rgba(255,255,255,0.04)',
@@ -64,15 +69,25 @@ function MatchCard({ match, byLetter }) {
       }}>
         Partido {match.match}
       </div>
-      <Slot slot={match.home} byLetter={byLetter} />
+      <Slot slot={match.home} ctx={cctx} />
       <div style={{ height: 0.5, background: 'rgba(255,255,255,0.06)', margin: '0 10px' }} />
-      <Slot slot={match.away} byLetter={byLetter} />
+      <Slot slot={match.away} ctx={cctx} />
     </div>
   );
 }
 
 export default function Bracket({ matches }) {
-  const byLetter = useMemo(() => standingsByLetter(matches), [matches]);
+  const ctx = useMemo(() => {
+    const byLetter = standingsByLetter(matches);
+    const ranking = thirdPlaceRanking(matches);
+    const played = finishedGroupMatches(matches) > 0;
+    // Proyectar terceros solo cuando hay datos y los 12 grupos están presentes
+    const thirdAssignment = (played && ranking.length === 12)
+      ? assignThirdPlaces(ranking.slice(0, 8).map((t) => t.letter))
+      : null;
+    return { byLetter, thirdAssignment };
+  }, [matches]);
+
   const complete = useMemo(() => groupStageComplete(matches), [matches]);
 
   return (
@@ -84,7 +99,7 @@ export default function Bracket({ matches }) {
       }}>
         {complete
           ? '🏆 Cruces confirmados según la clasificación final de grupos.'
-          : '⚡ Proyección en vivo: los cruces de 1º y 2º se actualizan conforme se mueve la tabla. Los terceros y rondas siguientes se definen al avanzar el torneo.'}
+          : '⚡ Proyección en vivo: los cruces se actualizan conforme se mueve la tabla. La asignación de terceros es una estimación hasta que FIFA cierre el cuadro al terminar los grupos.'}
       </p>
 
       {ROUNDS.map((round) => (
@@ -102,7 +117,7 @@ export default function Bracket({ matches }) {
             gap: 10,
           }}>
             {round.matches.map((m) => (
-              <MatchCard key={m.match} match={m} byLetter={byLetter} />
+              <MatchCard key={m.match} match={m} ctx={ctx} />
             ))}
           </div>
         </section>

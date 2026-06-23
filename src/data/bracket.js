@@ -49,6 +49,45 @@ export const SEMI_FINALS = [
 export const THIRD_PLACE = { match: 103, home: 'L101', away: 'L102' };
 export const FINAL       = { match: 104, home: 'W101', away: 'W102' };
 
+// Las 8 llaves de la Ronda de 32 que enfrentan a un tercero, con sus grupos elegibles.
+export const THIRD_PLACE_SLOTS = [
+  { match: 74, groups: ['A', 'B', 'C', 'D', 'F'] },
+  { match: 77, groups: ['C', 'D', 'F', 'G', 'H'] },
+  { match: 79, groups: ['C', 'E', 'F', 'H', 'I'] },
+  { match: 80, groups: ['E', 'H', 'I', 'J', 'K'] },
+  { match: 81, groups: ['B', 'E', 'F', 'I', 'J'] },
+  { match: 82, groups: ['A', 'E', 'H', 'I', 'J'] },
+  { match: 85, groups: ['E', 'F', 'G', 'I', 'J'] },
+  { match: 87, groups: ['D', 'E', 'I', 'J', 'L'] },
+];
+
+// Dado el conjunto de 8 grupos cuyos terceros clasifican, asigna cada tercero
+// a una llave donde su grupo es elegible (emparejamiento perfecto por backtracking).
+// Devuelve { 74: 'C', 77: 'D', ... } o null si no hay emparejamiento posible.
+export function assignThirdPlaces(qualifyingLetters) {
+  if (!qualifyingLetters || qualifyingLetters.length !== THIRD_PLACE_SLOTS.length) return null;
+  const used = new Set();
+  const result = {};
+
+  function backtrack(i) {
+    if (i === THIRD_PLACE_SLOTS.length) return true;
+    const slot = THIRD_PLACE_SLOTS[i];
+    const candidates = slot.groups
+      .filter((g) => qualifyingLetters.includes(g) && !used.has(g))
+      .sort();
+    for (const g of candidates) {
+      used.add(g);
+      result[slot.match] = g;
+      if (backtrack(i + 1)) return true;
+      used.delete(g);
+      delete result[slot.match];
+    }
+    return false;
+  }
+
+  return backtrack(0) ? result : null;
+}
+
 export const ROUNDS = [
   { key: 'r32', label: 'Ronda de 32', matches: ROUND_OF_32 },
   { key: 'r16', label: 'Octavos',     matches: ROUND_OF_16 },
