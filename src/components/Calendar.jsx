@@ -1,10 +1,12 @@
 import { useMemo, useState } from 'react';
 import MatchCard from './MatchCard';
 import GroupStandings from './GroupStandings';
+import Bracket from './Bracket';
 
 const STAGES = [
   { key: 'all',           label: 'Todos'     },
   { key: 'tabla',         label: 'Tabla'     },
+  { key: 'cruces',        label: 'Cruces'    },
   { key: 'ROUND_OF_32',   label: 'Ronda 32'  },
   { key: 'ROUND_OF_16',   label: 'Octavos'   },
   { key: 'QUARTER_FINALS',label: 'Cuartos'   },
@@ -22,7 +24,7 @@ export default function Calendar({ matches, timezone, selectedCountry, autoExpan
   const [stageFilter, setStageFilter] = useState('all');
 
   const grouped = useMemo(() => {
-    if (stageFilter === 'tabla') return {};
+    if (stageFilter === 'tabla' || stageFilter === 'cruces') return {};
     const filtered = stageFilter === 'all'
       ? matches
       : matches.filter((m) => m.stage === stageFilter);
@@ -90,6 +92,8 @@ export default function Calendar({ matches, timezone, selectedCountry, autoExpan
 
       {stageFilter === 'tabla' ? (
         <GroupStandings matches={matches} />
+      ) : stageFilter === 'cruces' ? (
+        <Bracket matches={matches} />
       ) : (
         <>
           {days.length === 0 && (
