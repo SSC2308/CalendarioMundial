@@ -136,14 +136,6 @@ export default function Bracket({ timezone }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-      <p style={{
-        fontSize: 12, color: 'rgba(255,255,255,0.3)', margin: 0,
-        padding: '10px 12px', borderRadius: 10,
-        background: 'rgba(212,175,55,0.06)', border: '0.5px solid rgba(212,175,55,0.15)',
-      }}>
-        ⚡ Cuadro en vivo (BBC). Los cruces marcados como "proyección" se actualizan según cómo va la tabla; se confirman al terminar cada fase.
-      </p>
-
       {(knockout.preFinalRounds ?? []).map((round) => (
         <Round key={round.roundName} label={ROUND_LABEL[round.roundName] ?? round.roundName} matches={round.matches} timezone={timezone} />
       ))}
