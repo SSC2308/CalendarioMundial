@@ -198,9 +198,13 @@ export default function MatchCard({ match, timezone, selectedCountry, autoExpand
               {scorersLoading ? (
                 <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.25)', margin: 0 }}>Cargando...</p>
               ) : scorers?.found ? (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                  <GoalList team={homeTeam?.name ?? ''} goals={scorers.home} align="left" />
-                  <GoalList team={awayTeam?.name ?? ''} goals={scorers.away} align="left" />
+                <div style={{ display: 'flex', gap: 16 }}>
+                  <div style={{ flex: 1 }}>
+                    <GoalList team={getTeamName(homeTeam?.name)} goals={scorers.home} align="left" />
+                  </div>
+                  <div style={{ flex: 1, textAlign: 'right' }}>
+                    <GoalList team={getTeamName(awayTeam?.name)} goals={scorers.away} align="right" />
+                  </div>
                 </div>
               ) : scorers && !scorers.found ? (
                 <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.25)', margin: 0 }}>Sin anotaciones registradas</p>
@@ -299,14 +303,15 @@ function formatStage(stage) {
 
 function GoalList({ team, goals, align }) {
   if (!goals || goals.length === 0) return null;
+  const isRight = align === 'right';
   return (
     <div>
       <p style={{ fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.35)', margin: '0 0 4px', textAlign: align }}>
         {team}
       </p>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 2, alignItems: isRight ? 'flex-end' : 'flex-start' }}>
         {goals.map((g, i) => (
-          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, color: 'rgba(255,255,255,0.7)' }}>
+          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, color: 'rgba(255,255,255,0.7)', flexDirection: isRight ? 'row-reverse' : 'row' }}>
             <span style={{ color: 'rgba(255,255,255,0.3)', fontVariantNumeric: 'tabular-nums', minWidth: 22 }}>
               {g.minute}{g.extra != null ? `+${g.extra}` : ''}'
             </span>
